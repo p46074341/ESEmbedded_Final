@@ -12,6 +12,7 @@ static uint32_t *psp_array[TASK_NUM];
 
 void setup_systick(uint32_t ticks);
 
+void fs(void);
 
 void init_task(unsigned int task_id, uint32_t *task_addr, uint32_t *psp_init)
 {
@@ -45,10 +46,7 @@ void task2(void)
 }
 void task3(void)
 {
-	printf("[Task3] Start in unprivileged thread mode.\r\n\n");
-	printf("[Task3] Control: 0x%x \r\n", (unsigned int)read_ctrl());
-	
-	fs(); // fibonacci sequence,the function detail is in the blink.c
+	fs(); // fibonacci sequence
 }
 
 
@@ -102,4 +100,25 @@ uint32_t *sw_task(uint32_t *psp)
 		curr_task_id = 0;
 
 	return psp_array[curr_task_id]; //return next psp
+}
+
+void fs(void)
+{
+	while (1)
+	{
+		int f1 = 0;
+		int f2 = 1;
+		int f3 = 1;
+		while (f3 > 0)
+		{	
+			int delay = 10000;
+			while(delay--)
+			;
+			printf("%d ",f3);
+			f3 = f1+f2;
+			f1 = f2;
+			f2 = f3;
+		}
+		printf("\r\n");
+	}
 }

@@ -82,24 +82,3 @@ void blink_count(unsigned int led, unsigned int count)
 	}
 }
 
-
-void fs(void)
-{
-	while (1)
-	{
-		int f1 = 0;
-		int f2 = 1;
-		int f3 = 1;
-		while (f3 > 0)
-		{	
-			int delay = 10000;
-			while(delay--)
-			;
-			printf("%d ",f3);
-			f3 = f1+f2;
-			f1 = f2;
-			f2 = f3;
-		}
-		printf("\r\n");
-	}
-}
